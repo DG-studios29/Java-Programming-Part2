@@ -1,0 +1,18 @@
+package task2;
+
+//Restaurant class represents a restaurant with a name and location
+class Restaurant {
+    private String name;
+    private String address;
+    private String area;
+
+    public Restaurant(String name, String address, String area) {
+        this.name = name;
+        this.address = address;
+        this.area = area;
+    }
+
+    public String getArea() {
+        return area;
+    }
+}

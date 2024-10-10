@@ -1,0 +1,84 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class QuickFoodDelivery {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter order number: ");
+        int orderNumber = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        System.out.print("Enter customer name: ");
+        String customerName = scanner.nextLine();
+
+        System.out.print("Enter customer email: ");
+        String customerEmail = scanner.nextLine();
+
+        System.out.print("Enter customer phone number: ");
+        String customerPhoneNumber = scanner.nextLine();
+
+        System.out.print("Enter customer location: ");
+        String customerLocation = scanner.nextLine();
+
+        System.out.println("You have ordered the following from Aesop’s Pizza in " + customerLocation + ":");
+        System.out.print("Enter number of Pepperoni pizzas: ");
+        int pepperoniQuantity = scanner.nextInt();
+
+        System.out.print("Enter number of Hawaiian pizzas: ");
+        int hawaiianQuantity = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        System.out.print("Enter special instructions: ");
+        String specialInstructions = scanner.nextLine();
+
+        double pepperoniPrice = 78.00;
+        double hawaiianPrice = 82.00;
+
+        double total = (pepperoniPrice * pepperoniQuantity) + (hawaiianPrice * hawaiianQuantity);
+
+        System.out.print("Enter delivery person's name: ");
+        String driverName = scanner.nextLine();
+
+        System.out.print("Enter delivery person's location: ");
+        String driverLocation = scanner.nextLine();
+
+        System.out.print("Enter delivery address: ");
+        String deliveryAddress = scanner.nextLine();
+
+        System.out.print("Enter restaurant contact number: ");
+        String restaurantContact = scanner.nextLine();
+
+        String invoice = "Invoice\n" +
+                "-------------------------------\n" +
+                "Order number: " + orderNumber + "\n" +
+                "Customer: " + customerName + "\n" +
+                "Email: " + customerEmail + "\n" +
+                "Phone number: " + customerPhoneNumber + "\n" +
+                "Location: " + customerLocation + "\n" +
+                "You have ordered the following from Aesop’s Pizza in " + customerLocation + ":\n" +
+                pepperoniQuantity + " x Pepperoni pizza (R" + pepperoniPrice + ")\n" +
+                hawaiianQuantity + " x Hawaiian pizza (R" + hawaiianPrice + ")\n" +
+                "Special instructions: " + specialInstructions + "\n" +
+                "Total: R" + total + "\n" +
+                driverName + " is nearest to the restaurant and so he will be delivering your\n" +
+                "order to you at:\n" + deliveryAddress + "\n" +
+                "If you need to contact the restaurant, their number is " + restaurantContact + ".\n" +
+                "-------------------------------";
+
+        writeInvoiceToFile(invoice);
+        System.out.println("Invoice generated and saved to invoice.txt");
+    }
+
+    public static void writeInvoiceToFile(String content) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("invoice.txt"));
+            writer.write(content);
+            writer.close();
+        } catch (IOException e) {
+            System.err.println("Error writing to invoice.txt file: " + e.getMessage());
+        }
+    }
+}

@@ -1,0 +1,138 @@
+package task2;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class QuickFoodDelivery {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Input customer information
+        System.out.print("Enter order number: ");
+        String orderNumber = scanner.nextLine();
+
+        System.out.print("Enter customer name: ");
+        String customerName = scanner.nextLine();
+
+        System.out.print("Enter contact number of the customer: ");
+        String customerContactNumber = scanner.nextLine();
+
+        System.out.print("Enter address of the customer: ");
+        String customerAddress = scanner.nextLine();
+
+        System.out.print("Enter location (city) of the customer: ");
+        String customerLocation = scanner.nextLine();
+
+        System.out.print("Enter email address of the customer: ");
+        String customerEmail = scanner.nextLine();
+
+        // Create a Customer object with the input information
+        Customer customer = new Customer(customerName, customerLocation);
+
+        // Input restaurant information
+        System.out.print("Enter name of the restaurant: ");
+        String restaurantName = scanner.nextLine();
+
+        System.out.print("Enter location of the restaurant: ");
+        String restaurantLocation = scanner.nextLine();
+
+        System.out.print("Enter contact number of the restaurant: ");
+        String restaurantContactNumber = scanner.nextLine();
+
+        // Create a Restaurant object with the input information
+        Restaurant restaurant = new Restaurant(restaurantName, restaurantLocation);
+
+        // Initialize variables for driver selection
+        Driver selectedDriver = null;
+        int smallestLoad = Integer.MAX_VALUE;
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("drivers.txt"));
+            String line;
+
+            // Read drivers from the file and select the suitable driver
+            while ((line = reader.readLine()) != null) {
+                // Read each line from the drivers.txt file
+
+                // Split the line into parts using ", " as the separator
+                String[] parts = line.split(", ");
+
+                // Check if the line contains at least 3 parts (name, location, load)
+                if (parts.length >= 3) {
+                    // Extract driver information from the parts
+
+                    // The first part is the driver's name
+                    String driverName = parts[0];
+
+                    // The second part is the driver's location (city)
+                    String driverLocation = parts[1];
+
+                    // The third part is the driver's current load, converted to an integer
+                    int driverLoad = Integer.parseInt(parts[2]);
+
+
+                    if (customer.getLocation().equalsIgnoreCase(driverLocation)) {
+                        if (driverLoad < smallestLoad) {
+                            // Update smallestLoad and selectedDriver if this driver has a smaller load
+                            smallestLoad = driverLoad;
+                            selectedDriver = new Driver(driverName, driverLocation, driverLoad);
+                        }
+                    }
+                }
+            }
+
+            reader.close();
+
+            if (selectedDriver != null) {
+                // Create the invoice content
+                String invoice = "Invoice for Order #" + orderNumber + "\n\n"
+                               + "Customer Information:\n"
+                               + "Name: " + customer.getName() + "\n"
+                               + "Contact Number: " + customerContactNumber + "\n"
+                               + "Address: " + customerAddress + "\n"
+                               + "Location: " + customerLocation + "\n"
+                               + "Email: " + customerEmail + "\n\n"
+                               + "Restaurant Information:\n"
+                               + "Name: " + restaurant.getName() + "\n"
+                               + "Location: " + restaurant.getLocation() + "\n"
+                               + "Contact Number: " + restaurantContactNumber + "\n\n"
+                               + "Driver Information:\n"
+                               + "Name: " + selectedDriver.getName() + "\n"
+                               + "Location: " + selectedDriver.getLocation() + "\n"
+                               + "Load: " + selectedDriver.getLoad() + "\n";
+
+                // Write the invoice content to a file
+                writeInvoiceToFile(invoice);
+                System.out.println("Invoice generated and saved to invoice.txt");
+            } else {
+                // If no suitable driver found, create a message and save it to the invoice file
+                writeInvoiceToFile("Sorry! Our drivers are too far away from you to be able to deliver to your location.");
+                System.out.println("No suitable driver found. Invoice saved to invoice.txt");
+            }
+
+        } catch (IOException e) {
+            System.err.println("Error reading drivers.txt file: " + e.getMessage());
+        }
+    }
+
+ // Function to write the invoice content to a file
+    public static void writeInvoiceToFile(String content) {
+        try {
+            // Create a BufferedWriter to write to the "invoice.txt" file
+            BufferedWriter writer = new BufferedWriter(new FileWriter("invoice.txt"));
+            
+            // Write the invoice content to the file
+            writer.write(content);
+            
+            // Close the writer to finalize the writing process
+            writer.close();
+        } catch (IOException e) {
+            // If an exception occurs while writing, display an error message
+            System.err.println("Error writing to invoice.txt file: " + e.getMessage());
+        }
+    }
+}

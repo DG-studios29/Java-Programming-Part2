@@ -1,0 +1,24 @@
+package task2;
+
+//Customer class represents a customer with a name and phone number
+class Customer {
+    private String name;
+    private String address;
+
+    public Customer(String name, String address) {
+        this.setName(name);
+        this.address = address;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+}

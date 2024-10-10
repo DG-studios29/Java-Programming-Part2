@@ -1,0 +1,47 @@
+package task1;
+
+public class Scientist extends Person {
+	private String labCoatColor;
+	private String typeOfScientist;
+
+	public Scientist(int height, String hairColor, boolean is18OrOlder, String labCoatColor, String typeOfScientist) {
+		super(height, hairColor, is18OrOlder);
+		this.labCoatColor = labCoatColor;
+		this.setTypeOfScientist(typeOfScientist);
+	}
+
+	public String determineScientistType() {
+		switch (labCoatColor.toLowerCase()) {
+		case "green":
+			return "Biologist";
+		case "purple":
+			return "Physicist";
+		case "white":
+			return "Pharmacist";
+		case "blue":
+			return "Climatologist";
+		case "yellow":
+			return "Geneticist";
+		case "red":
+			return "Zoologist";
+		default:
+			return "Unknown Scientist";
+		}
+	}
+
+	public void printScientistDescription() {
+		System.out.println("Scientist Type: " + determineScientistType());
+		System.out.println("Lab Coat Color: " + labCoatColor);
+		System.out.println("Height: " + getHeight());
+		System.out.println("Hair Color: " + getHairColor());
+		System.out.println("Is 18 or older: " + is18OrOlder());
+	}
+
+	public String getTypeOfScientist() {
+		return typeOfScientist;
+	}
+
+	public void setTypeOfScientist(String typeOfScientist) {
+		this.typeOfScientist = typeOfScientist;
+	}
+}

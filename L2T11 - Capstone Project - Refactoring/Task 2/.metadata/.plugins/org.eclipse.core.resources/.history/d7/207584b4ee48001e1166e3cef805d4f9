@@ -1,0 +1,72 @@
+package task2;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+//Main program class
+public class QuickFoodDelivery {
+ public static void main(String[] args) {
+     try {
+         Scanner scanner = new Scanner(System.in);
+
+         // Capture customer details
+         System.out.println("Enter customer name:");
+         String customerName = scanner.nextLine();
+         System.out.println("Enter customer address:");
+         String customerAddress = scanner.nextLine();
+
+         // Create a Customer object
+         Customer customer = new Customer(customerName, customerAddress);
+
+         // Capture restaurant details
+         System.out.println("Enter restaurant name:");
+         String restaurantName = scanner.nextLine();
+         System.out.println("Enter restaurant address:");
+         String restaurantAddress = scanner.nextLine();
+
+         // Create a Restaurant object
+         Restaurant restaurant = new Restaurant(restaurantName, restaurantAddress);
+
+         // Read driver information from drivers.txt and find the driver with the smallest load
+         Driver selectedDriver = null;
+         int minLoad = Integer.MAX_VALUE;
+
+         // Open and read the drivers.txt file
+         try (Scanner fileScanner = new Scanner(new File("drivers.txt"))) {
+             while (fileScanner.hasNextLine()) {
+                 String line = fileScanner.nextLine();
+                 String[] parts = line.split(",");
+                 if (parts.length == 2) {
+                     String driverName = parts[0];
+                     int driverLoad = Integer.parseInt(parts[1]);
+
+                     // Check if the driver has the smallest load
+                     if (driverLoad < minLoad) {
+                         minLoad = driverLoad;
+                         selectedDriver = new Driver(driverName, driverLoad);
+                     }
+                 }
+             }
+         }
+
+         if (selectedDriver != null) {
+             // Write the invoice to invoice.txt
+             try (PrintWriter invoiceWriter = new PrintWriter(new FileWriter("invoice.txt"))) {
+                 invoiceWriter.println("Customer Name: " + customer.getName());
+                 invoiceWriter.println("Customer Address: " + customer.getAddress());
+                 invoiceWriter.println("Restaurant Name: " + restaurant.getName());
+                 invoiceWriter.println("Restaurant Address: " + restaurant.getAddress());
+                 invoiceWriter.println("Driver Name: " + selectedDriver.getName());
+                 invoiceWriter.println("Driver Load: " + selectedDriver.getLoad());
+             }
+             System.out.println("Invoice generated successfully and saved in invoice.txt");
+         } else {
+             System.out.println("Sorry! Our drivers are too far away from you to be able to deliver to your location.");
+         }
+     } catch (IOException e) {
+         e.printStackTrace();
+     }
+ }
+}

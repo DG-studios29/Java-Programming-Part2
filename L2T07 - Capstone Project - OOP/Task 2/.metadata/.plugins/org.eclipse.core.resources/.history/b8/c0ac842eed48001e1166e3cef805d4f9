@@ -1,0 +1,75 @@
+package task2;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class QuickFoodDelivery {
+    public static void main(String[] args) {
+        List<Customer> customers = new ArrayList<>();
+        List<Restaurant> restaurants = new ArrayList<>();
+        List<Driver> drivers = new ArrayList<>();
+
+        // Capture customer details
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter customer name: ");
+        String customerName = scanner.nextLine();
+        System.out.print("Enter customer address: ");
+        String customerAddress = scanner.nextLine();
+        Customer customer = new Customer(customerName, customerAddress);
+
+        // Capture restaurant details
+        System.out.print("Enter restaurant name: ");
+        String restaurantName = scanner.nextLine();
+        System.out.print("Enter restaurant address: ");
+        String restaurantAddress = scanner.nextLine();
+        System.out.print("Enter restaurant area: ");
+        String restaurantArea = scanner.nextLine();
+        Restaurant restaurant = new Restaurant(restaurantName, restaurantAddress, restaurantArea);
+
+        // Read driver details from drivers.txt
+        try (BufferedReader reader = new BufferedReader(new FileReader("drivers.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length == 3) {
+                    String driverName = parts[0];
+                    String driverArea = parts[1];
+                    int driverLoad = Integer.parseInt(parts[2]);
+                    drivers.add(new Driver(driverName, driverArea, driverLoad));
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Find the nearest driver
+        Driver nearestDriver = null;
+        for (Driver driver : drivers) {
+            if (driver.getArea().equalsIgnoreCase(restaurant.getArea())) {
+                if (nearestDriver == null || driver.getLoad() < nearestDriver.getLoad()) {
+                    nearestDriver = driver;
+                }
+            }
+        }
+
+        // Generate and write the invoice
+        try (PrintWriter writer = new PrintWriter(new FileWriter("invoice.txt"))) {
+            if (nearestDriver == null) {
+                writer.println("Sorry! Our drivers are too far away from you to be able to deliver to your location.");
+            } else {
+                writer.println("Customer: " + customer.getName());
+                writer.println("Restaurant: " + restaurant.getName());
+                writer.println("Driver: " + nearestDriver.getName());
+                writer.println("Delivery Address: " + customer.getAddress());
+                writer.println("Load: " + nearestDriver.getLoad());
+                writer.println("Total Amount: "); // You can calculate the total amount here
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Invoice has been written to invoice.txt.");
+    }
+}

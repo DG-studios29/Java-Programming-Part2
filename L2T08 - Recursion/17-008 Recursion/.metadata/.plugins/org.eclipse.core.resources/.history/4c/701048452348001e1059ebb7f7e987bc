@@ -1,0 +1,22 @@
+package task2;
+
+public class LCMRecursion {
+	public static int gcd(int x, int y) {
+        if (y == 0) {
+            return x; // Base case: gcd(x, 0) = x
+        }
+        return gcd(y, x % y); // Recursive case: gcd(x, y) = gcd(y, x % y)
+    }
+
+    public static int lcm(int x, int y) {
+        return (x * y) / gcd(x, y); // LCM(x, y) = (x * y) / gcd(x, y)
+    }
+
+    public static void main(String[] args) {
+        int x = 12;
+        int y = 18;
+        
+        int result = lcm(x, y);
+        System.out.println("LCM of " + x + " and " + y + " is: " + result);
+    }
+}

@@ -1,0 +1,16 @@
+Order number 551
+Customer: dsgsd2
+Email: gsrgw@dfhe.com
+Phone number: 2585
+Location: Durban
+
+You have ordered the following from bob in durban:
+5 x w (R500.0) = R2500.0
+Special instructions: no
+Total: R2500.0
+
+Eugene Santana is nearest to the restaurant and so he will be delivering your order to you at:
+g streest
+Durban
+
+If you need to contact the restaurant, their number is 2453255.

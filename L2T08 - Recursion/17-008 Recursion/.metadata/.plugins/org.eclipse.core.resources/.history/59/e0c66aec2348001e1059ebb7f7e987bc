@@ -1,0 +1,26 @@
+package task2;
+
+public class LCMRecursion {
+	
+
+	    // Recursive function to calculate the greatest common divisor (GCD)
+	    static int gcd(int a, int b) {
+	        if (b == 0) {
+	            return a;
+	        }
+	        return gcd(b, a % b);
+	    }
+
+	    // Recursive function to calculate the LCM
+	    static int lcm(int x, int y) {
+	        return (x * y) / gcd(x, y);
+	    }
+
+	    public static void main(String[] args) {
+	        int num1 = 12;
+	        int num2 = 18;
+	        System.out.println("LCM of " + num1 + " and " + num2 + " is: " + lcm(num1, num2));
+	    }
+	}
+
+

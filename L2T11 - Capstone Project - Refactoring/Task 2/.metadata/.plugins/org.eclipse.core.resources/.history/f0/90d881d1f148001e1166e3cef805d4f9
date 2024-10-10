@@ -1,0 +1,40 @@
+package task2;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class Restaurant {
+    private String name;
+    private String location;
+    private Map<String, Double> menu = new HashMap<>();
+    private String contactNumber;
+
+    public Restaurant(String name, String location) {
+        this.name = name;
+        this.location = location;
+    }
+
+    public void addMenuItem(String item, double price) {
+        menu.put(item, price);
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public Map<String, Double> getMenu() {
+        return menu;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+}

@@ -1,0 +1,4 @@
+INDEX VERSION 1.134+C:\Users\dhill\Dropbox\DG23020006446\2 - Advanced Programming Concepts\L2T18 - Software Documentation\.metadata\.plugins\org.eclipse.jdt.core
+1865797976.index
+2648502573.index
+1546482155.index

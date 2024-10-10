@@ -1,0 +1,5 @@
+package taskpack1;
+
+public class LinearProbing {
+
+}

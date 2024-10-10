@@ -1,0 +1,21 @@
+public class Errors {
+
+    public static double FtoC(double fahrenheit) { // Fixed: Removed extra 'double'
+        double celsius = (fahrenheit - 32) * 5 / 9; // Fixed: Corrected the conversion formula
+        double roundingOff = Math.round(celsius * 100);
+        double finalAnswer = roundingOff / 100;
+        return finalAnswer; // Fixed: Added semicolon at the end
+    } // Fixed: Added closing curly brace
+
+    public static void main(String[] args) {
+
+        System.out.println("Fahrenheit to Celsius converter:");
+
+        double degreesFahrenheit = 54.3; // Fixed: Changed the data type to double
+        double degreesCelsius = FtoC(degreesFahrenheit); // Fixed: Corrected the method call and variable name
+        System.out.println(degreesFahrenheit + "°F = " + degreesCelsius + "°C");
+    }
+}
+
+
+// Once you've corrected all the errors, the answer should be 12.39°C

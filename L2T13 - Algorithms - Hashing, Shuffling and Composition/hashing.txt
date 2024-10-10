@@ -1,0 +1,41 @@
+Algorithm: Simple Fruit Hashing
+
+1. Define the Fruit Class:
+   - Create a Fruit class with two attributes: name and color.
+   - Ensure the class has methods for setting and getting these attributes.
+
+2. Initialize a Hashing Function:
+   - Initialize a hash function, such as SHA-256, which is a widely-used cryptographic hash function.
+
+3. Hashing Process:
+   - To hash a fruit object, follow these steps:
+     a. Convert the attributes (name and color) into a single string format, e.g., "Apple|Red".
+     b. Encode the string using a specific encoding (e.g., UTF-8) to ensure consistency.
+     c. Pass the encoded string to the chosen hash function (SHA-256) to generate a hash value.
+     d. The resulting hash value will be a unique representation of the fruit object.
+
+4. Example Code (Python):
+
+```python
+import hashlib
+
+class Fruit:
+    def __init__(self, name, color):
+        self.name = name
+        self.color = color
+
+    def get_hash(self):
+        # Convert attributes to a string
+        fruit_string = f"{self.name}|{self.color}"
+        
+        # Encode the string to bytes (UTF-8)
+        encoded_string = fruit_string.encode('utf-8')
+
+        # Generate SHA-256 hash
+        sha256_hash = hashlib.sha256(encoded_string).hexdigest()
+
+        return sha256_hash
+
+# Example usage
+apple = Fruit("Apple", "Red")
+print("Hash for Apple:", apple.get_hash())

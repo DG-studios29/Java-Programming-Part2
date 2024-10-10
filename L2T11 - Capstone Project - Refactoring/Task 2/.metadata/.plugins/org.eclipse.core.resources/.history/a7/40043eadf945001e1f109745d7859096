@@ -1,0 +1,81 @@
+package task2;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class QuickFoodDelivery {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter customer name: ");
+        String customerName = scanner.nextLine();
+
+        System.out.print("Enter customer location: ");
+        String customerLocation = scanner.nextLine();
+
+        Customer customer = new Customer(customerName, customerLocation);
+
+        System.out.print("Enter restaurant name: ");
+        String restaurantName = scanner.nextLine();
+
+        System.out.print("Enter restaurant location: ");
+        String restaurantLocation = scanner.nextLine();
+
+        Restaurant restaurant = new Restaurant(restaurantName, restaurantLocation);
+
+        Driver selectedDriver = null;
+        int smallestLoad = Integer.MAX_VALUE;
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("//CompulsoryTask2//drivers"));
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(", ");
+                if (parts.length >= 3) {
+                    String driverName = parts[0];
+                    String driverLocation = parts[1];
+                    int driverLoad = Integer.parseInt(parts[2]);
+
+                    if (customer.getLocation().equalsIgnoreCase(driverLocation)) {
+                        if (driverLoad < smallestLoad) {
+                            smallestLoad = driverLoad;
+                            selectedDriver = new Driver(driverName, driverLocation, driverLoad);
+                        }
+                    }
+                }
+            }
+
+            reader.close();
+
+            if (selectedDriver != null) {
+                String invoice = "Invoice for " + customer.getName() + ":\n"
+                               + "Restaurant: " + restaurant.getName() + " (" + restaurant.getLocation() + ")\n"
+                               + "Driver: " + selectedDriver.getName() + " (" + selectedDriver.getLocation() + ")\n"
+                               + "Load: " + selectedDriver.getLoad() + "\n";
+                writeInvoiceToFile(invoice);
+                System.out.println("Invoice generated and saved to invoice.txt");
+            } else {
+                writeInvoiceToFile("Sorry! Our drivers are too far away from you to be able to deliver to your location.");
+                System.out.println("No suitable driver found. Invoice saved to invoice.txt");
+            }
+
+        } catch (IOException e) {
+            System.err.println("Error reading drivers.txt file: " + e.getMessage());
+        }
+    }
+
+    public static void writeInvoiceToFile(String content) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("/CompulsoryTask2/invoice"));
+            writer.write(content);
+            writer.close();
+        } catch (IOException e) {
+            System.err.println("Error writing to invoice.txt file: " + e.getMessage());
+        }
+    }
+}

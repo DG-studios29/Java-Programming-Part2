@@ -1,0 +1,94 @@
+package task2;
+
+import java.io.*;
+import java.util.*;
+
+public class InvoiceGen {
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		// Read drivers' data from the file
+		List<Driver> drivers = readDriversFromFile("drivers.txt");
+
+		System.out.print("Enter customer's location: ");
+		String customerLocation = scanner.nextLine();
+
+		System.out.print("Enter restaurant's location: ");
+		String restaurantLocation = scanner.nextLine();
+
+		// Find available drivers in the restaurant's location
+		List<Driver> availableDrivers = findAvailableDrivers(drivers, restaurantLocation);
+		// Find the driver with the smallest load among the available drivers
+		Driver selectedDriver = findDriverWithSmallestLoad(availableDrivers);
+
+		if (selectedDriver == null) {
+			System.out.println("Sorry! Our drivers are too far away from you to be able to deliver to your location.");
+			return;
+		}
+
+		// Generate an invoice and write it to a file
+		String invoice = generateInvoice(selectedDriver, customerLocation, restaurantLocation);
+		writeInvoiceToFile("invoice.txt", invoice);
+
+		System.out.println("Invoice generated and saved as invoice.txt");
+	}
+
+	// Read drivers' data from the given file and create Driver objects
+	private static List<Driver> readDriversFromFile(String filename) {
+		List<Driver> drivers = new ArrayList<>();
+		try (Scanner fileScanner = new Scanner(new File(filename))) {
+			while (fileScanner.hasNextLine()) {
+				String line = fileScanner.nextLine();
+				String[] parts = line.split(", ");
+				if (parts.length == 3) {
+					String name = parts[0];
+					String location = parts[1];
+					int load = Integer.parseInt(parts[2]);
+					drivers.add(new Driver(name, location, load));
+				}
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return drivers;
+	}
+
+	// Filter and return a list of drivers available in the given location
+	private static List<Driver> findAvailableDrivers(List<Driver> drivers, String restaurantLocation) {
+		List<Driver> availableDrivers = new ArrayList<>();
+		for (Driver driver : drivers) {
+			if (driver.location.equals(restaurantLocation)) {
+				availableDrivers.add(driver);
+			}
+		}
+		return availableDrivers;
+	}
+
+	// Find and return the driver with the smallest load among the provided drivers
+	private static Driver findDriverWithSmallestLoad(List<Driver> drivers) {
+		if (drivers.isEmpty()) {
+			return null;
+		}
+		Driver smallestLoadDriver = drivers.get(0);
+		for (Driver driver : drivers) {
+			if (driver.load < smallestLoadDriver.load) {
+				smallestLoadDriver = driver;
+			}
+		}
+		return smallestLoadDriver;
+	}
+
+	// Generate an invoice text based on the selected driver and location details
+	private static String generateInvoice(Driver driver, String customerLocation, String restaurantLocation) {
+		return "Invoice\n\n" + "Driver: " + driver.name + "\n" + "Customer Location: " + customerLocation + "\n"
+				+ "Restaurant Location: " + restaurantLocation + "\n" + "Load: " + driver.load;
+	}
+
+	// Write the generated invoice text to the specified file
+	private static void writeInvoiceToFile(String filename, String invoice) {
+		try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
+			writer.println(invoice);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+}

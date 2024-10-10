@@ -1,0 +1,135 @@
+package task2;
+
+import java.util.Map;
+
+public class Customer {
+    private int orderNumber;
+    private String name;
+    private String contactNumber;
+    private String address;
+    private String location;
+    private String email;
+    private String restaurantName;
+    private String restaurantLocation;
+    private String restaurantContactNumber;
+    private Map<String, Integer> orderedMeals;
+    private Map<String, Double> mealPrices;
+    private String specialInstructions;
+
+    public Customer(int orderNumber, String name, String contactNumber, String address, String location, String email,
+                    String restaurantName, String restaurantLocation, String restaurantContactNumber,
+                    Map<String, Integer> orderedMeals, Map<String, Double> mealPrices, String specialInstructions) {
+        this.setOrderNumber(orderNumber);
+        this.setName(name);
+        this.setContactNumber(contactNumber);
+        this.setAddress(address);
+        this.setLocation(location);
+        this.setEmail(email);
+        this.setRestaurantName(restaurantName);
+        this.setRestaurantLocation(restaurantLocation);
+        this.setRestaurantContactNumber(restaurantContactNumber);
+        this.setOrderedMeals(orderedMeals);
+        this.setMealPrices(mealPrices);
+        this.setSpecialInstructions(specialInstructions);
+    }
+
+	public String getSpecialInstructions() {
+		return specialInstructions;
+	}
+
+	public void setSpecialInstructions(String specialInstructions) {
+		this.specialInstructions = specialInstructions;
+	}
+
+	public int getOrderNumber() {
+		return orderNumber;
+	}
+
+	public void setOrderNumber(int orderNumber) {
+		this.orderNumber = orderNumber;
+	}
+
+	public String getContactNumber() {
+		return contactNumber;
+	}
+
+	public void setContactNumber(String contactNumber) {
+		this.contactNumber = contactNumber;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getRestaurantName() {
+		return restaurantName;
+	}
+
+	public void setRestaurantName(String restaurantName) {
+		this.restaurantName = restaurantName;
+	}
+
+	public String getRestaurantLocation() {
+		return restaurantLocation;
+	}
+
+	public void setRestaurantLocation(String restaurantLocation) {
+		this.restaurantLocation = restaurantLocation;
+	}
+
+	public String getRestaurantContactNumber() {
+		return restaurantContactNumber;
+	}
+
+	public void setRestaurantContactNumber(String restaurantContactNumber) {
+		this.restaurantContactNumber = restaurantContactNumber;
+	}
+
+	public Map<String, Integer> getOrderedMeals() {
+		return orderedMeals;
+	}
+
+	public void setOrderedMeals(Map<String, Integer> orderedMeals) {
+		this.orderedMeals = orderedMeals;
+	}
+
+	public Map<String, Double> getMealPrices() {
+		return mealPrices;
+	}
+
+	public void setMealPrices(Map<String, Double> mealPrices) {
+		this.mealPrices = mealPrices;
+	}
+
+    // Getters and setters for all fields here...
+}
+
+

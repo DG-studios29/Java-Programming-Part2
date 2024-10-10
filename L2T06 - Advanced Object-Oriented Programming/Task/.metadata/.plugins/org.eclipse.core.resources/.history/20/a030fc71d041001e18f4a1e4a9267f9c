@@ -1,0 +1,35 @@
+package task1;
+
+public class Doctor extends Person {
+	private int yearsExperience;
+    private String ranking;
+
+    public Doctor(int height, String hairColor, boolean is18OrOlder,
+                  int yearsExperience) {
+        super(height, hairColor, is18OrOlder);
+        this.yearsExperience = yearsExperience;
+        determineRanking();
+    }
+
+    private void determineRanking() {
+        if (yearsExperience >= 0 && yearsExperience <= 6) {
+            ranking = "Medical student";
+        } else if (yearsExperience >= 7 && yearsExperience <= 8) {
+            ranking = "Intern";
+        } else if (yearsExperience >= 9 && yearsExperience <= 16) {
+            ranking = "Resident";
+        } else if (yearsExperience >= 17 && yearsExperience <= 20) {
+            ranking = "Fellow";
+        } else {
+            ranking = "Attending";
+        }
+    }
+
+    public void printDoctorDescription() {
+        System.out.println("Ranking: " + ranking);
+        System.out.println("Years of Experience: " + yearsExperience);
+        System.out.println("Height: " + getHeight());
+        System.out.println("Hair Color: " + getHairColor());
+        System.out.println("Is 18 or older: " + is18OrOlder());
+    }
+}

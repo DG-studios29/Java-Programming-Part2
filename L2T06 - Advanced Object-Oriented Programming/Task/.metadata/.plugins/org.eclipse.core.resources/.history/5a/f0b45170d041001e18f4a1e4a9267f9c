@@ -1,0 +1,26 @@
+package task1;
+
+public class Person {
+	
+	 private int height;
+	    private String hairColor;
+	    private boolean is18OrOlder;
+
+	    public Person(int height, String hairColor, boolean is18OrOlder) {
+	        this.height = height;
+	        this.hairColor = hairColor;
+	        this.is18OrOlder = is18OrOlder;
+	    }
+
+	    public int getHeight() {
+	        return height;
+	    }
+
+	    public String getHairColor() {
+	        return hairColor;
+	    }
+
+	    public boolean is18OrOlder() {
+	        return is18OrOlder;
+	    }
+}

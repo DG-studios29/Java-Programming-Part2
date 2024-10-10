@@ -1,0 +1,15 @@
++-------------------+          +-------------------+
+|       Dog         |          |       Cat         |
++-------------------+          +-------------------+
+| - name: String    |          | - name: String    |
+| - age: int        |          | - age: int        |
+| - breed: String   |          | - breed: String   |
+| - isMale: boolean |          | - isMale: boolean |
+| - weight: double  |          | - weight: double  |
++-------------------+          +-------------------+
+| + Dog(name, age,  |          | + Cat(name, age,  |
+|     breed, isMale,|          |     breed, isMale,|
+|     weight)       |          |     weight)       |
+| + toString():     |          | + toString():     |
+|     String        |          |     String        |
++-------------------+          +-------------------+

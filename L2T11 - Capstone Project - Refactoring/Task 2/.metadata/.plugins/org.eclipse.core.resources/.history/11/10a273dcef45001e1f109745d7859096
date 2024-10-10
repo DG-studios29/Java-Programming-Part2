@@ -1,0 +1,15 @@
+package task2;
+
+//Driver class represents a driver with a name, location, and load
+public class Driver {
+ String name;
+ String location;
+ int load;
+
+ public Driver(String name, String location, int load) {
+     this.name = name;
+     this.location = location;
+     this.load = load;
+ }
+}
+

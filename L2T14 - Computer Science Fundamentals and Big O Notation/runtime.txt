@@ -1,0 +1,45 @@
+Algorithm: Generate All Combinations of Characters in a String
+
+1. Function: generate_combinations(string, current_combination, index)
+   Input:
+     - string: The input string for which combinations are to be generated.
+     - current_combination: The current combination being generated.
+     - index: The current index in the input string.
+
+2. If index is equal to the length of the input string:
+   a. Print the current_combination as a valid combination.
+   b. Return.
+
+3. Include the character at the current index in the current_combination.
+   a. Call generate_combinations recursively with incremented index.
+   b. Remove the last character from current_combination (backtrack).
+
+4. Skip the character at the current index in the input string.
+   a. Call generate_combinations recursively with incremented index.
+
+5. Main function: generate_all_combinations(input_string)
+   Input:
+     - input_string: The input string for which combinations are to be generated.
+
+6. Call generate_combinations with initial values:
+   - string = input_string
+   - current_combination = empty string
+   - index = 0
+
+7. Display or process the generated combinations as needed.
+
+Example Usage:
+---------------
+input_string = "abc"
+generate_all_combinations(input_string)
+
+Output:
+-------
+Generated Combinations:
+a
+ab
+abc
+ac
+b
+bc
+c

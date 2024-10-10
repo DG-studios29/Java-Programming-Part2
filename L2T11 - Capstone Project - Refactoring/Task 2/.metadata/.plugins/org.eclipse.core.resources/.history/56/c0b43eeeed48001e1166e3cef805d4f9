@@ -1,0 +1,29 @@
+package task2;
+
+//Driver class represents a driver with a name, location, and load
+class Driver {
+    // Fields to store driver details
+    private String name;
+    private String area;
+    private int load;
+
+    // Constructor to create a Driver object
+    public Driver(String name, String area, int load) {
+        this.name = name;
+        this.area = area;
+        this.load = load;
+    }
+
+    // Getter methods to access driver details
+    public String getName() {
+        return name;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public int getLoad() {
+        return load;
+    }
+}

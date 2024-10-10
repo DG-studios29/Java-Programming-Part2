@@ -1,0 +1,29 @@
+package task2;
+
+//Restaurant class represents a restaurant with a name and location
+class Restaurant {
+    // Fields to store restaurant details
+    private String name;
+    private String address;
+    private String area;
+
+    // Constructor to create a Restaurant object
+    public Restaurant(String name, String address, String area) {
+        this.name = name;
+        this.address = address;
+        this.area = area;
+    }
+
+    // Getter methods to access restaurant details
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getArea() {
+        return area;
+    }
+}

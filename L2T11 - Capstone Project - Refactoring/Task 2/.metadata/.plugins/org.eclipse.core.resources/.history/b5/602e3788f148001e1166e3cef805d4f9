@@ -1,0 +1,44 @@
+package task2;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Customer {
+    private String name;
+    private String email;
+    private String phoneNumber;
+    private String location;
+    private List<String> orders = new ArrayList<>();
+
+    public Customer(String name, String email, String phoneNumber, String location) {
+        this.name = name;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.location = location;
+    }
+
+    public void addOrder(String order) {
+        orders.add(order);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public List<String> getOrders() {
+        return orders;
+    }
+}
+

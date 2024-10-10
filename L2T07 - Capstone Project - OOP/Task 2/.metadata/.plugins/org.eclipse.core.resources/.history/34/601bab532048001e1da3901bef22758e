@@ -1,0 +1,100 @@
+package task2;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class QuickFoodDelivery {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter customer name: ");
+        String customerName = scanner.nextLine();
+
+        System.out.print("Enter customer email: ");
+        String customerEmail = scanner.nextLine();
+
+        System.out.print("Enter customer phone number: ");
+        String customerPhoneNumber = scanner.nextLine();
+
+        System.out.print("Enter customer location: ");
+        String customerLocation = scanner.nextLine();
+
+        Customer customer = new Customer(customerName, customerLocation, customerEmail, customerPhoneNumber);
+
+        System.out.print("Enter restaurant name: ");
+        String restaurantName = scanner.nextLine();
+
+        System.out.print("Enter restaurant location: ");
+        String restaurantLocation = scanner.nextLine();
+
+        Restaurant restaurant = new Restaurant(restaurantName, restaurantLocation);
+
+        // Assuming the order details are collected elsewhere in the code
+        Order[] orders = {}; // Array of Order objects
+
+        // Calculate total order amount
+        double totalAmount = calculateTotalAmount(orders);
+
+        Driver selectedDriver = findNearestDriver(customerLocation);
+
+        // Generate the invoice content
+        String invoiceContent = generateInvoiceContent(customer, restaurant, orders, totalAmount, selectedDriver);
+
+        // Write the invoice content to a text file
+        writeInvoiceToFile("invoice.txt", invoiceContent);
+
+        System.out.println("Invoice generated and saved to invoice.txt");
+    }
+
+    // Other methods remain the same
+
+    public static double calculateTotalAmount(Order[] orders) {
+        // Calculate the total amount for the orders
+        double totalAmount = 0;
+        for (Order order : orders) {
+            totalAmount += order.getQuantity() * order.getPrice();
+        }
+        return totalAmount;
+    }
+
+    public static String generateInvoiceContent(Customer customer, Restaurant restaurant,
+                                                Order[] orders, double totalAmount, Driver driver) {
+        StringBuilder content = new StringBuilder();
+        content.append("Order number ").append(generateOrderNumber()).append("\n");
+        content.append("Customer: ").append(customer.getName()).append("\n");
+        content.append("Email: ").append(customer.getEmail()).append("\n");
+        content.append("Phone number: ").append(customer.getPhoneNumber()).append("\n");
+        content.append("Location: ").append(customer.getLocation()).append("\n\n");
+
+        content.append("You have ordered the following from ").append(restaurant.getName())
+               .append(" in ").append(restaurant.getLocation()).append(":\n");
+        for (Order order : orders) {
+            content.append(order.getQuantity()).append(" x ").append(order.getItem())
+                   .append(" (R").append(order.getPrice()).append(")\n");
+            content.append("Special instructions: ").append(order.getSpecialRequest()).append("\n");
+        }
+        content.append("Total: R").append(totalAmount).append("\n\n");
+
+        content.append(driver.getName()).append(" is nearest to the restaurant and so he will be delivering your\n")
+               .append("order to you at:\n")
+               .append(driver.getLocation()).append("\n\n");
+
+        content.append("If you need to contact the restaurant, their number is ").append(restaurant.getPhoneNumber());
+
+        return content.toString();
+    }
+
+    public static void writeInvoiceToFile(String fileName, String content) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+            writer.write(content);
+            writer.close();
+        } catch (IOException e) {
+            System.err.println("Error writing to " + fileName + " file: " + e.getMessage());
+        }
+    }
+}

@@ -1,0 +1,80 @@
+Class MenuItem:
+    Properties:
+        - name : String
+        - price : double
+        - description : String
+    Methods:
+        + MenuItem(name: String, price: double, description: String)
+        + display(): void
+
+Class Order:
+    Properties:
+        - items : List<MenuItem>
+        - total_price : double
+    Methods:
+        + Order()
+        + add_item(menuItem: MenuItem): void
+        + remove_item(menuItem: MenuItem): void
+        + calculate_total(): void
+
+Class Menu:
+    Properties:
+        - items : List<MenuItem>
+    Methods:
+        + Menu()
+        + add_item(menuItem: MenuItem): void
+        + remove_item(menuItem: MenuItem): void
+        + display(): void
+
+Class Customer:
+    Properties:
+        - name : String
+        - phone_number : String
+        - address : String
+        - order : Order
+    Methods:
+        + Customer(name: String, phone_number: String, address: String)
+        + place_order(menuItem: MenuItem): void
+        + view_order(): void
+        + cancel_order(): void
+
+Class QuickFoodApp:
+    Properties:
+        - menu : Menu
+        - customers : List<Customer>
+    Methods:
+        + QuickFoodApp()
+        + add_customer(customer: Customer): void
+        + remove_customer(customer: Customer): void
+        + display_menu(): void
+        + process_order(customer: Customer, menuItem: MenuItem): void
+        + view_customer_orders(customer: Customer): void
+        + cancel_customer_order(customer: Customer): void
+
+Main:
+    quickFoodApp = new QuickFoodApp()
+    Create several menu items and add them to quickFoodApp.menu
+    Create customers and add them to quickFoodApp.customers
+
+    Loop:
+        Display menu and options
+        Read user choice
+
+        If user choice is to place an order:
+            Display menu
+            Read selected menu item
+            Select a customer
+            Process order for selected customer and menu item
+            Display order confirmation
+
+        If user choice is to view orders:
+            Select a customer
+            Display customer's orders
+
+        If user choice is to cancel an order:
+            Select a customer
+            Select an order to cancel
+            Cancel the selected order
+
+        If user choice is to exit:
+            Exit the loop

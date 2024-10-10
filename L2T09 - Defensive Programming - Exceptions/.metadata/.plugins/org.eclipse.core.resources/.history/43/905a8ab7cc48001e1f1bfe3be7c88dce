@@ -1,0 +1,5 @@
+package passwordpack;
+
+public class PasswordAuthenticator {
+
+}

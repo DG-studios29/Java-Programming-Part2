@@ -1,0 +1,23 @@
+package task2;
+
+//Customer class represents a customer with a name and phone number
+class Customer {
+    // Fields to store customer details
+    private String name;
+    private String address;
+
+    // Constructor to create a Customer object
+    public Customer(String name, String address) {
+        this.name = name;
+        this.address = address;
+    }
+
+    // Getter methods to access customer details
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+}

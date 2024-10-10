@@ -1,0 +1,13 @@
+package task1;
+
+public class Main {
+	 public static void main(String[] args) {
+	        Scientist scientist = new Scientist(175, "Brown", true, "Green", "Biologist");
+	        scientist.printScientistDescription();
+
+	        System.out.println();
+
+	        Doctor doctor = new Doctor(180, "Black", true, 12);
+	        doctor.printDoctorDescription();
+	    }
+}
